@@ -94,6 +94,19 @@ class Chat extends React.Component {
         ));
     };
 
+    scrollToBottom = () => {
+        this.messagesEnd.scrollIntoView({ behavior: "smooth" })
+
+    };
+
+    componentDidMount() {
+        this.scrollToBottom();
+    }
+
+    componentDidUpdate() {
+        this.scrollToBottom();
+    }
+
     componentDidMount() {
         WebSocketInstance.connect();
     }
@@ -108,6 +121,9 @@ class Chat extends React.Component {
                         messages &&
                         this.renderMessages(messages)
                     }
+                    <div style={{ float: "left", clear: "both" }}
+                         ref={(el) => { this.messagesEnd = el; }}>
+                    </div>
                     </ul>
                 </div>
                 <div className="message-input">
